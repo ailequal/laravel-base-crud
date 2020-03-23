@@ -21,7 +21,6 @@ class AlbumsController extends Controller
 		public function index()
 		{
 				$albums = Album::all();
-				// $albums = Album::all()->toArray();
 				return view('index', ["albums"=>$albums]);
 		}
 
@@ -44,6 +43,7 @@ class AlbumsController extends Controller
 		public function store(Request $request)
 		{
 				$album = new Album();
+				$id = $album->id;
 				$album->album = $request->album;
 				$album->artist = $request->artist;
 				$album->tracks = $request->tracks;
@@ -52,7 +52,7 @@ class AlbumsController extends Controller
 				$album->cover = $request->cover;
 				$album->save();
 
-				return view('show');
+				return view('show', compact($id));
 		}
 
 		/**
@@ -63,7 +63,8 @@ class AlbumsController extends Controller
 		 */
 		public function show($id)
 		{
-				//
+				$album = Album::where('id', $id)->first();
+				return view('show', ["album"=>$album]);
 		}
 
 		/**

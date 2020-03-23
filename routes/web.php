@@ -19,5 +19,3 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'AlbumsController@index')->name('album.index');
 Route::resource('albums', 'AlbumsController');
-
-Route::get('/test', 'AlbumsController@test')->name('album.test');
