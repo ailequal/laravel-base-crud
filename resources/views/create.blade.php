@@ -20,22 +20,22 @@
 		@method('POST')
 		{{-- normal form --}}
 		<label for="title">Album</label>
-		<input type="text" name="album" placeholder="Album">
+		<input type="text" name="album" placeholder="Album"><br>
 
 		<label for="title">Artist</label>
-		<input type="text" name="artist" placeholder="Artist">
+		<input type="text" name="artist" placeholder="Artist"><br>
 
 		<label for="title">Tracks</label>
-		<input type="text" name="tracks" placeholder="Tracks">
+		<input type="text" name="tracks" placeholder="Tracks"><br>
 
 		<label for="title">Genre</label>
-		<input type="text" name="genre" placeholder="Genre">
+		<input type="text" name="genre" placeholder="Genre"><br>
 
 		<label for="title">Released</label>
-		<input type="text" name="released" placeholder="Released">
+		<input type="text" name="released" placeholder="Released"><br>
 
 		<label for="title">Cover</label>
-		<input type="text" name="cover" placeholder="Cover">
+		<input type="text" name="cover" placeholder="Cover"><br>
 
 		<input type="submit" value="Submit">
 	</form>

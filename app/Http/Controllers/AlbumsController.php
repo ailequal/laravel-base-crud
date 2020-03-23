@@ -52,7 +52,8 @@ class AlbumsController extends Controller
 				$album->cover = $request->cover;
 				$album->save();
 
-				return view('show', compact($id));
+				// return view('show', compact($id));
+				AlbumsController::show($id);
 		}
 
 		/**

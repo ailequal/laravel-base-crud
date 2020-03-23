@@ -13,7 +13,7 @@
 	<a href="{{route('album.index')}}">HOME</a>
 
 	<div>
-		<h2>Album: {{$album->album}}</h2>
+		<h2>Album: <a href="{{route('albums.show', $album->id)}}">{{$album->album}}</a></h2>
 		<h3>Artist: {{$album->artist}}</h3>
 		<h4>Tracks: {{$album->tracks}}</h4>
 		<h4>Genre: {{$album->genre}}</h4>
