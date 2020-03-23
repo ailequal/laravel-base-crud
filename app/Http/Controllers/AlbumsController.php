@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Album;
 
-class AlbumController extends Controller
+class AlbumsController extends Controller
 {
 		/**
 		 * Display a listing of the resource.
@@ -13,25 +13,16 @@ class AlbumController extends Controller
 		 * @return \Illuminate\Http\Response
 		 */
 
-		public function __construct() {
-			// $this->data = Album::all();
-			// $query = Album::where('genre', 'Progressive rock')->orderBy('album', 'desc')->limit(5)->get();
-
-			$album = new Album();
-			$album->album = 'Ghost Stories';
-			$album->artist = 'Coldplay';
-			$album->tracks = '9';
-			$album->genre = 'Alternative rock';
-			$album->released = '2014';
-			$album->cover = 'img/cover/ghost-stories.jpg';
-			$album->save();
-
-			dd();
+		public function __construct()
+		{
+				//
 		}
 
 		public function index()
 		{
-				return view('index', $this->data);
+				$albums = Album::all();
+				// $albums = Album::all()->toArray();
+				return view('index', ["albums"=>$albums]);
 		}
 
 		/**
@@ -41,7 +32,7 @@ class AlbumController extends Controller
 		 */
 		public function create()
 		{
-				//
+				return view('create');
 		}
 
 		/**
@@ -52,7 +43,16 @@ class AlbumController extends Controller
 		 */
 		public function store(Request $request)
 		{
-				//
+				$album = new Album();
+				$album->album = $request->album;
+				$album->artist = $request->artist;
+				$album->tracks = $request->tracks;
+				$album->genre = $request->genre;
+				$album->released = $request->released;
+				$album->cover = $request->cover;
+				$album->save();
+
+				return view('show');
 		}
 
 		/**
