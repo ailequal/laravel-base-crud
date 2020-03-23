@@ -1,3 +1,5 @@
+{{-- @dd($items); --}}
+
 <!DOCTYPE html>
 <html lang="en">
 
