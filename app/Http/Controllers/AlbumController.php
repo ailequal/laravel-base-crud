@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Album;
 
-class AlbumsController extends Controller
+class AlbumController extends Controller
 {
 		/**
 		 * Display a listing of the resource.
@@ -52,8 +52,7 @@ class AlbumsController extends Controller
 				$album->cover = $request->cover;
 				$album->save();
 
-				// return view('show', compact($id));
-				AlbumsController::show($id);
+				return redirect()->route('albums.show', $album->id);
 		}
 
 		/**

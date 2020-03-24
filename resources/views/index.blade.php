@@ -10,7 +10,7 @@
 
 <body>
 	<h1>index - laravel-base-crud</h1>
-	<a href="{{route('album.index')}}">HOME</a>
+	<a href="{{route('albums.index')}}">HOME</a>
 	<a href="{{route('albums.create')}}">CREATE</a>
 
 	@foreach ($albums as $album)

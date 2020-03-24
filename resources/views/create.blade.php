@@ -10,7 +10,7 @@
 
 <body>
 	<h1>create - laravel-base-crud</h1>
-	<a href="{{route('album.index')}}">HOME</a>
+	<a href="{{route('albums.index')}}">HOME</a>
 
 	<form action="{{route('albums.store')}}" method="POST">
 		{{-- token generator --}}

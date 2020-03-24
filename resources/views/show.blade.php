@@ -10,7 +10,7 @@
 
 <body>
 	<h1>show - laravel-base-crud</h1>
-	<a href="{{route('album.index')}}">HOME</a>
+	<a href="{{route('albums.index')}}">HOME</a>
 
 	<div>
 		<h2>Album: <a href="{{route('albums.show', $album->id)}}">{{$album->album}}</a></h2>
