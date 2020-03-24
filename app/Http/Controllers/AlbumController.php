@@ -88,7 +88,10 @@ class AlbumController extends Controller
 		 */
 		public function edit($id)
 		{
-				//
+			// call from the db the record matching the given id
+			$album = Album::where('id', $id)->first();
+
+			return view('edit', ["album"=>$album]);
 		}
 
 		/**
@@ -100,8 +103,26 @@ class AlbumController extends Controller
 		 */
 		public function update(Request $request, $id)
 		{
-				//
-		}
+				// store all the data passed with patch method
+				$data = $request->all();
+
+				// form validation with laravel for the patch data
+				$request->validate([
+					'album' => 'required|string|max:100',
+					'artist' => 'required|string|max:100',
+					'tracks' => 'required|numeric',
+					'genre' => 'required|string|max:100',
+					'released' => 'required|date_format:Y',
+					'cover' => 'required|string|max:100',
+				]);
+
+				// find album to patch
+				$album = Album::find($id);
+
+				// patch the object stored inside the db matching the id
+				$album->update($data);
+
+				return redirect()->route('albums.show', $album->id);		}
 
 		/**
 		 * Remove the specified resource from storage.

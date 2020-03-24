@@ -9,32 +9,32 @@
 </head>
 
 <body>
-	<h1>create - laravel-base-crud</h1>
+	<h1>edit - laravel-base-crud</h1>
 	<a href="{{route('albums.index')}}">HOME</a>
 
-	<form action="{{route('albums.store')}}" method="POST">
+	<form action="{{route('albums.update', $album->id)}}" method="POST">
 		{{-- token generator --}}
 		@csrf
 		{{-- specify method --}}
-		@method('POST')
+		@method('PATCH')
 		{{-- normal form --}}
 		<label for="title">Album</label>
-		<input type="text" name="album" placeholder="Album"><br>
+		<input type="text" name="album" placeholder="Album" value="{{$album->album}}"><br>
 
 		<label for="title">Artist</label>
-		<input type="text" name="artist" placeholder="Artist"><br>
+		<input type="text" name="artist" placeholder="Artist" value="{{$album->artist}}"><br>
 
 		<label for="title">Tracks</label>
-		<input type="text" name="tracks" placeholder="Tracks"><br>
+		<input type="text" name="tracks" placeholder="Tracks" value="{{$album->tracks}}"><br>
 
 		<label for="title">Genre</label>
-		<input type="text" name="genre" placeholder="Genre"><br>
+		<input type="text" name="genre" placeholder="Genre" value="{{$album->genre}}"><br>
 
 		<label for="title">Released</label>
-		<input type="text" name="released" placeholder="Released"><br>
+		<input type="text" name="released" placeholder="Released" value="{{$album->released}}"><br>
 
 		<label for="title">Cover</label>
-		<input type="text" name="cover" placeholder="Cover"><br>
+		<input type="text" name="cover" placeholder="Cover" value="{{$album->cover}}"><br>
 
 		<input type="submit" value="Submit">
 	</form>

@@ -23,6 +23,7 @@
 		<h4>Cover: {{$album->cover}}</h4>
 		<h4>Created at: {{$album->created_at}}</h4>
 		<h4>Updated at: {{$album->updated_at}}</h4>
+		<a href="{{route('albums.edit', $album->id)}}">EDIT</a>
 		<br>
 	</div>
 	@endforeach
