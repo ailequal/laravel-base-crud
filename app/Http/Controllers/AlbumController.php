@@ -20,7 +20,9 @@ class AlbumController extends Controller
 
 		public function index()
 		{
+				// requesting all the albums from the db
 				$albums = Album::all();
+
 				return view('index', ["albums"=>$albums]);
 		}
 
@@ -31,6 +33,7 @@ class AlbumController extends Controller
 		 */
 		public function create()
 		{
+				// redirect to the form for creating a new entry inside the db
 				return view('create');
 		}
 
@@ -42,14 +45,22 @@ class AlbumController extends Controller
 		 */
 		public function store(Request $request)
 		{
+				// store all the data passed with post method
+				$data = $request->all();
+
+				// form validation with laravel for the post data
+				$request->validate([
+					'album' => 'required|string|max:100',
+					'artist' => 'required|string|max:100',
+					'tracks' => 'required|numeric',
+					'genre' => 'required|string|max:100',
+					'released' => 'required|date_format:Y',
+					'cover' => 'required|string|max:100',
+				]);
+
+				// creating a new object to store inside the db
 				$album = new Album();
-				$id = $album->id;
-				$album->album = $request->album;
-				$album->artist = $request->artist;
-				$album->tracks = $request->tracks;
-				$album->genre = $request->genre;
-				$album->released = $request->released;
-				$album->cover = $request->cover;
+				$album->fill($data);
 				$album->save();
 
 				return redirect()->route('albums.show', $album->id);
@@ -63,7 +74,9 @@ class AlbumController extends Controller
 		 */
 		public function show($id)
 		{
+				// call from the db the record matching the given id
 				$album = Album::where('id', $id)->first();
+
 				return view('show', ["album"=>$album]);
 		}
 
