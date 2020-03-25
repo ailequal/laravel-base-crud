@@ -103,7 +103,12 @@ class AlbumController extends Controller
 			// call from the db the record matching the given id
 			$album = Album::where('id', $id)->first();
 
-			return view('edit', ["album"=>$album]);
+			// if the selection process was successfull go to edit with selected album
+			if (!empty($album)) {
+				return view('edit', ["album"=>$album]);
+			} else {
+				abort('404');
+			}
 		}
 
 		/**
