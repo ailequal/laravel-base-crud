@@ -64,7 +64,7 @@ class AlbumController extends Controller
 				$album = new Album();
 				$album->fill($data);
 
-				// if the save process was successfull show the new album
+				// if the save process was successful show the new album
 				$save = $album->save();
 				if ($save) {
 					return redirect()->route('albums.show', $album->id);
@@ -84,7 +84,7 @@ class AlbumController extends Controller
 				// call from the db the record matching the given id
 				$album = Album::where('id', $id)->first();
 
-				// if the selection process was successfull show the selected album
+				// if the selection process was successful show the selected album
 				if (!empty($album)) {
 					return view('show', ["album"=>$album]);
 				} else {
@@ -103,7 +103,7 @@ class AlbumController extends Controller
 			// call from the db the record matching the given id
 			$album = Album::where('id', $id)->first();
 
-			// if the selection process was successfull go to edit with selected album
+			// if the selection process was successful go to edit with selected album
 			if (!empty($album)) {
 				return view('edit', ["album"=>$album]);
 			} else {
@@ -124,22 +124,21 @@ class AlbumController extends Controller
 				$data = $request->all();
 
 				// form validation with laravel for the patch data
-				$request->validate([
-					'album' => 'required|string|max:100',
-					'artist' => 'required|string|max:100',
-					'tracks' => 'required|numeric',
-					'genre' => 'required|string|max:100',
-					'released' => 'required|date_format:Y',
-					'cover' => 'required|string|max:100',
-				]);
+				$request->validate($this->albumValidation);
 
 				// find album to patch
 				$album = Album::find($id);
 
-				// patch the object stored inside the db matching the id
-				$album->update($data);
-
-				return redirect()->route('albums.show', $album->id);		}
+				// if the selection process was successful
+				if (!empty($album)) {
+					// patch the object stored inside the db matching the id
+					$album->update($data);
+					// start the show function from controller
+					return redirect()->route('albums.show', $album->id);
+				} else {
+					abort('404');
+				}
+			}
 
 		/**
 		 * Remove the specified resource from storage.
