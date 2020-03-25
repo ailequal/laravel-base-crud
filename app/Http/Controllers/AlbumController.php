@@ -148,10 +148,7 @@ class AlbumController extends Controller
 		 */
 		public function destroy($id)
 		{
-				// select album matching id from db
-
-				// delete selected album from db
-				// DB::table('users')->where('votes', '>', 100)->delete();
+				// select album matching id from db and delete it
 				Album::find($id)->delete();
 
 				// requesting all the albums from the db
