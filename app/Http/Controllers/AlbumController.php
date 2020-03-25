@@ -13,6 +13,15 @@ class AlbumController extends Controller
 		 * @return \Illuminate\Http\Response
 		 */
 
+		private $albumValidation = [
+			'album' => 'required|string|max:100',
+			'artist' => 'required|string|max:100',
+			'tracks' => 'required|numeric',
+			'genre' => 'required|string|max:100',
+			'released' => 'required|date_format:Y',
+			'cover' => 'required|string|max:100'
+		];
+
 		public function __construct()
 		{
 				//
@@ -49,21 +58,19 @@ class AlbumController extends Controller
 				$data = $request->all();
 
 				// form validation with laravel for the post data
-				$request->validate([
-					'album' => 'required|string|max:100',
-					'artist' => 'required|string|max:100',
-					'tracks' => 'required|numeric',
-					'genre' => 'required|string|max:100',
-					'released' => 'required|date_format:Y',
-					'cover' => 'required|string|max:100',
-				]);
+				$request->validate($this->albumValidation);
 
 				// creating a new object to store inside the db
 				$album = new Album();
 				$album->fill($data);
-				$album->save();
 
-				return redirect()->route('albums.show', $album->id);
+				// if the save process was successfull show the new album
+				$save = $album->save();
+				if ($save) {
+					return redirect()->route('albums.show', $album->id);
+				} else {
+					abort('500');
+				}
 		}
 
 		/**
@@ -132,6 +139,15 @@ class AlbumController extends Controller
 		 */
 		public function destroy($id)
 		{
-				//
+				// select album matching id from db
+
+				// delete selected album from db
+				// DB::table('users')->where('votes', '>', 100)->delete();
+				Album::find($id)->delete();
+
+				// requesting all the albums from the db
+				$albums = Album::all();
+
+				return view('index', ["albums"=>$albums]);
 		}
 }

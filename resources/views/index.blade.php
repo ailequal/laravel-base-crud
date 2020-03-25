@@ -24,6 +24,11 @@
 		<h4>Created at: {{$album->created_at}}</h4>
 		<h4>Updated at: {{$album->updated_at}}</h4>
 		<a href="{{route('albums.edit', $album->id)}}">EDIT</a>
+		<form action="{{route('albums.destroy', $album->id)}}" method="POST">
+			@csrf
+			@method('DELETE')
+			<button type="submit">DELETE</button>
+		</form>
 		<br>
 	</div>
 	@endforeach
